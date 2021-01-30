@@ -75,7 +75,8 @@ def solve(board):
 
                 if solve(board):
                     return True
-                del_num(pos, board)
+                else:
+                    del_num(pos, board)
 
         return False
 
