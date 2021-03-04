@@ -1,29 +1,18 @@
-board = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 8],
-    [0, 2, 0, 0, 5, 0, 7, 6, 0],
-    [0, 6, 0, 0, 0, 0, 0, 0, 3],
-    [5, 0, 0, 0, 0, 0, 2, 0, 7],
-    [0, 3, 0, 0, 1, 0, 0, 0, 0],
-    [2, 0, 0, 4, 0, 0, 0, 3, 0],
-    [0, 0, 0, 6, 0, 0, 0, 0, 0],
-    [8, 0, 0, 0, 0, 0, 0, 0, 0],
-    [1, 0, 0, 2, 7, 0, 0, 4, 0]
-    ]
 # function to print out the board
-def print_board(bo):
-    for i in range(len(bo)):
-        if i % 3 == 0 and i != 0:
-            print("----------------------")
 
-        for j in range(len(bo[i])):
-            if j % 3 == 0 and j != 0:
-                print("| ", end="")
+from time import *
+from tkinter import *
+from tkinter import messagebox
 
-            print(str(bo[i][j]) + " ", end = "")
-        print()
+sudoku_board = [[0 for row in range(9)] for col in range(9)]
+root = Tk()
+clear_clicked = [False]
+is_instant = [False]
+
+def rgbtohex(r,g,b):
+    return f'#{r:01x}{g:02x}{b:02x}'
 
 #given a pos and num check to see if it's valid to add the num at that position
-
 def valid_place(pos, num, board):
     # everything in that row can not be equal to num
     y, x = pos
@@ -51,34 +40,50 @@ def add_num(num, pos, board):
 # a function to delete the number from the board
 def del_num(pos, board):
     y,x = pos
-    board[y][x] = 0
+    board[y][x] = ''
 
 # a function to find the first empty space in the board and return its position
 def first_empty(board):
     for i in range(len(board)):
         for j in range(len(board[i])):
-            if board[i][j] == 0:
+            if board[i][j] == '':
                 return (i,j)
 
     return False
 
 def solve(board):
+    global clear_clicked
+
     found = first_empty(board)
     if not found:
         return True
     else:
         pos = first_empty(board)
         for i in range(1, 10):
+
+            if clear_clicked[0] == True:
+                clear_clicked[0] = False
+                return True
+
+            sudoku_board[pos[0]][pos[1]].delete(0, END)
+            sudoku_board[pos[0]][pos[1]].insert(0, i)
+
+            if is_instant[0] == False:
+                root.update()
+                sleep(0.01)
+
             if valid_place(pos, i, board):
                 # add the pos onto the board
-                add_num(i,pos, board)
+
+                add_num(i, pos, board)
 
                 if solve(board):
                     return True
                 else:
                     del_num(pos, board)
 
+        sudoku_board[pos[0]][pos[1]].delete(0, END)
         return False
 
-solve(board)
-print_board(board)
+
+
