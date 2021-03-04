@@ -5,8 +5,8 @@ root.title("Sudoku Solver By Anthony Ouch")
 root.configure(background = rgbtohex(25,73,114))
 
 def start(board):
-    print('hi')
     is_instant[0] = False
+    clear_clicked[0] = False
     anotherboard = [[0 for row in range(9)] for col in range(9)]
     for i in range(BOARD_LEN):
         for j in range(BOARD_LEN):
@@ -19,7 +19,7 @@ def clear(board):
     for i in range(BOARD_LEN):
         for j in range(BOARD_LEN):
             sudoku_board[i][j].delete(0,END)
-
+    
 def instant(board):
     is_instant[0] = True
 
@@ -50,3 +50,11 @@ clearbutton = Button(root, width=4, text = "Clear", font= ('Arial', 30), command
 clearbutton.grid(row = 5, column = 9, padx = 7,ipadx =20)
 
 root.mainloop()
+#to do list
+# if its invalid board, go red
+# if it's unsolvable pop window unsolvable
+# can only enter num 1-9
+# after clicking solve, make it unclickable
+# cannot click instant before solve
+# maybe cannot click clear when its empty
+# create icon for program

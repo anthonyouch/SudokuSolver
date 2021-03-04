@@ -9,6 +9,8 @@ root = Tk()
 clear_clicked = [False]
 is_instant = [False]
 
+
+
 def rgbtohex(r,g,b):
     return f'#{r:01x}{g:02x}{b:02x}'
 
@@ -62,7 +64,6 @@ def solve(board):
         for i in range(1, 10):
 
             if clear_clicked[0] == True:
-                clear_clicked[0] = False
                 return True
 
             sudoku_board[pos[0]][pos[1]].delete(0, END)
