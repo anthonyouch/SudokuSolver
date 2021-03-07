@@ -23,6 +23,12 @@ def clear():
     global stop_validation
     global sudoku_board
     global board2
+    global cnt
+    global check_fail
+
+    cnt[0] = 0
+    check_fail = list()
+
     solve_started[0] = False
     stop_validation[0] = False
     board2 = [['' for row in range(BOARD_LEN)] for col in range(BOARD_LEN)]

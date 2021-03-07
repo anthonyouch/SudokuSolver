@@ -67,14 +67,26 @@ def first_empty(board):
 
     return False
 
+cnt = [0]
+check_fail = []
+
 def solve(board):
     global clear_clicked
+    global cnt
+    global check_fail
+
+    if cnt[0] > 500:
+        messagebox.showinfo("Warning", "Unsolvable Sudoku or will take a long time to solve")
+        return True
 
     found = first_empty(board)
     if not found:
         return True
     else:
         pos = first_empty(board)
+        check_fail.append([cnt[0], pos])
+        cnt[0] += 1
+
         for i in range(1, 10):
 
             if clear_clicked[0] == True:
@@ -96,6 +108,9 @@ def solve(board):
                     del_num(pos, board)
 
         sudoku_board[pos[0]][pos[1]].delete(0, END)
+
+        if check_fail[0] == [0, pos]:
+            messagebox.showinfo("Warning", "Unsolvable Sudoku")
 
         return False
 
