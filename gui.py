@@ -3,6 +3,7 @@ BOARD_LEN = 9
 
 root.title("Sudoku Solver By Anthony Ouch")
 root.configure(background = rgbtohex(25,73,114))
+root.resizable(0,0)
 
 red_count = 0
 
@@ -139,6 +140,8 @@ def validate(P, s, i, j):
 
 for i in range(9):
     for j in range(9):
+
+        global sudoku_board
         vcmd = root.register(validate)
         dic = {0: (4,0),  2: (0,4), 5: (0,4), 8: (0,4)}
         currentpady = (0,0)
@@ -166,11 +169,3 @@ clearbutton = Button(root, width=4, text = "Clear", font= ('Arial', 30), command
 clearbutton.grid(row = 5, column = 9, padx = 7,ipadx =20)
 
 root.mainloop()
-#to do list
-# if its invalid board, go red
-# if it's unsolvable pop window unsolvable
-# can only enter num 1-9
-# after clicking solve, make it unclickable
-# cannot click instant before solve
-# maybe cannot click clear when its empty
-# create icon for program

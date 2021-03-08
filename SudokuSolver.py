@@ -114,7 +114,4 @@ def solve(board):
 
         return False
 
-def test(board):
-    sudoku_board[0][0].delete(0,END)
-    sudoku_board[0][0].insert(0, str())
 
